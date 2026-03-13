@@ -1,0 +1,612 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sitecore.ExperienceEdge.Connector.Abstraction</name>
+    </assembly>
+    <members>
+        <member name="T:Sitecore.ExperienceEdge.Connector.Abstraction.BaseLanguageFallbackHierarchyDataSource">
+            <summary>
+            Base class for language fallback hierarchy data source implementation.
+            </summary>
+            <seealso cref="T:Sitecore.ExperienceEdge.Connector.Abstraction.ILanguageFallbackHierarchyDataSource" />
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.BaseLanguageFallbackHierarchyDataSource.Refresh(System.String)">
+            <summary>
+            Initialize the dependencies between the languages and their fallback languages.
+            </summary>
+            <param name="targetDatabaseName">The targeted database which used to read all the languages items under '/sitecore/system/Languages' </param>
+            <returns></returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.BaseLanguageFallbackHierarchyDataSource.RefreshAsync(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.BaseLanguageFallbackHierarchyDataSource.GetLanguageHierarchy(System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.BaseLanguageFallbackHierarchyDataSource.GetLanguageHierarchyToRoot(System.String,System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.Configurations.EdgeConnectorSettings.ExcludeSitecoreMediaUrlPrefix">
+            <summary>
+            Indicate if media url prefix is required to be added or not. 
+            </summary>
+        </member>
+        <member name="T:Sitecore.ExperienceEdge.Connector.Abstraction.Constants">
+            <summary>
+            Well known constant values.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.DirectPublishing.DirectPublishContext.ItemsSentToEdge">
+            <inheritdoc/>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.DirectPublishing.DirectPublishContext.ItemsProcessedByEdge">
+            <inheritdoc/>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.DirectPublishing.DirectPublishContext.ItemsAcknowledgedByEdge">
+            <inheritdoc/>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.DirectPublishing.DirectPublishContext.SkippedItems">
+            <inheritdoc/>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.DirectPublishing.DirectPublishContext.DeletedItems">
+            <inheritdoc/>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.DirectPublishing.DirectPublishContext.FailedPublishes">
+            <inheritdoc/>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.DirectPublishing.DirectPublishItemContext.SelectedPublishJobTarget">
+            <summary>
+            Selectes a publish job target
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.DirectPublishing.IDirectPublishContext.ItemsSentToEdge">
+            <summary>
+            Total number of items sent to edge
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.DirectPublishing.IDirectPublishContext.PrimaryItemsSetToEdge">
+            <summary>
+            Number of Item Entities sent to edge
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.DirectPublishing.IDirectPublishContext.AdditionalItemsSetToEdge">
+            <summary>
+            Number of Domain Specific Entitiees sent to edge
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.DirectPublishing.IDirectPublishContext.ItemsProcessedByEdge">
+            <summary>
+            Number of items processed by edge
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.DirectPublishing.IDirectPublishContext.ItemsAcknowledgedByEdge">
+            <summary>
+            Number of items acknowledged by edge
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.DirectPublishing.IDirectPublishContext.FailedPublishes">
+            <summary>
+            Number of items that got a failed repsponse from edge
+            </summary>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.DirectPublishing.IDirectPublishContext.IncrementPrimaryItemsSentToEdge(System.Int32)">
+            <summary>
+            Number of primary items sent to edge
+            </summary>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.DirectPublishing.IDirectPublishContext.IncrementAdditionalItemsSentToEdge(System.Int32)">
+            <summary>
+            Number of additional items sent to edge
+            </summary>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.DirectPublishing.IDirectPublishContext.IncrementItemsProcessedByEdge(System.Int32)">
+            <summary>
+            Number of items processed by edge
+            </summary>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.DirectPublishing.IDirectPublishContext.IncrementItemsAcknowledgedEdge(System.Int32)">
+            <summary>
+            Number of items acknowledged by edge
+            </summary>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.DirectPublishing.IDirectPublishContext.IncrementSkippedItems(System.Int32)">
+            <summary>
+            Number of items acknowledged by edge
+            </summary>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.DirectPublishing.IItemDeDuper.IsItemDuplicate(Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemPublishInfo)">
+            <summary>
+            Checks for duplicate and also registers the item in the duplicate cache. Also returns the item delete status since it is pssible
+            we see items that are update and delete
+            </summary>
+            <param name="itemPublishInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.DirectPublishing.IItemDeDuper.DeDupItems(System.Collections.Generic.IEnumerable{Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemPublishInfo})">
+            <summary>
+            De dups items in a collection and turns any items that are known deletes into deleted items
+            </summary>
+            <param name="itemPublishInfos"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.DirectPublishing.IItemDeDuper.RegisterDeletedItem(Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemPublishInfo)">
+            <summary>
+            Tell the de-dup service that an item is a delete. This will allow updates to be converted to delete further down the pipeline
+            </summary>
+            <param name="itemPublishInfo"></param>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.DirectPublishing.IItemPublishComparisonStatus.GetItemsPublishingStatusAsync(System.Collections.Generic.IEnumerable{Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemPublishInfo})">
+            <summary>
+            compare the publishing item with the edge to verify changes 
+            </summary>
+            <param name="itemPublishInfos">The <see cref="T:System.Collections.Generic.IEnumerable`1"/> to be compared with the edge</param>
+            <returns>The result of the comparison with the edge</returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.DirectPublishing.IItemPublishStatus.ShouldRepublishItemsAsync(System.Collections.Generic.IEnumerable{Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemPublishInfo})">
+            <summary>
+            Checks edge to see if items should be republished
+            </summary>
+            <param name="itemIds">List of items to check</param>
+            <param name="language">The language (culture) to check</param>
+            <returns>(Item ID, republish status)</returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.DirectPublishing.IItemPublishStatus.GetAssociatedEntitiesAsync(Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemPublishInfo)">
+            <summary>
+            Returns the entity identifiers associated with the specified entity
+            </summary>
+            <param name="itemPublishInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.DirectPublishing.IItemPublishStatus.PopulateAssociatedEntitiesAsync(System.Collections.Generic.IEnumerable{Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemPublishInfo})">
+            <summary>
+            Returns the entity identifiers associated with the specified entity
+            </summary>
+            <param name="itemPublishInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.DirectPublishing.ITPLActionBlock`1.Transform">
+            <summary>
+            This is the func for the transform. It should be declared as "Execute". When we switch to C#8, this can be replaced with a default implementation
+            </summary>
+        </member>
+        <member name="T:Sitecore.ExperienceEdge.Connector.Abstraction.DirectPublishing.ITPLTransformBlock`2">
+            <summary>
+            Interface for creating TPL blocks as injectable objects instead of methods on a pipline class.
+            </summary>
+            <typeparam name="TInput"></typeparam>
+            <typeparam name="TOutput"></typeparam>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.DirectPublishing.ITPLTransformBlock`2.Transform">
+            <summary>
+            This is the func for the transform. It should be declared as "Execute". When we switch to C#8, this can be replaced with a default implementation
+            </summary>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.DirectPublishing.ITPLTransformBlock`2.Execute(`0)">
+            <summary>
+            Executes the TPL block
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Sitecore.ExperienceEdge.Connector.Abstraction.DirectPublishing.ITPLTransformBlockAsync`2">
+            <summary>
+            Interface for creating an Async block
+            </summary>
+            <typeparam name="TInput"></typeparam>
+            <typeparam name="TOutput"></typeparam>
+        </member>
+        <member name="T:Sitecore.ExperienceEdge.Connector.Abstraction.DirectPublishing.TimedTransformBlockBase">
+            <summary>
+            Implements a transform block that supports collection of timing info
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.DirectPublishing.TimedTransformBlockBase.TotalExecutionTimeMS">
+            <inheritdoc/>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.DirectPublishing.TimedTransformBlockBase.LogTime(System.Int64)">
+            <inheritdoc/>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.EdgePageDependencies.GetPageDependenciesArgs.Item">
+            <summary>
+            Get or set the Sitecore Item
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.EdgePageDependencies.GetPageDependenciesArgs.Result">
+            <summary>
+            Get the Content Dependency Collection
+            </summary>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.EntityGenerator.IConnectorItemSiteResolver.ResolveSite(Sitecore.Data.Items.Item)">
+            <summary>
+            Resolve the site that the item belongs to
+            </summary>
+            <param name="item">The item to resolve its site</param>
+            <returns>The site info of the item</returns>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.EntityGenerator.IContentHubSettings.MaxExportEntitiesThreadCount">
+            <summary>
+            Gets the maximum number of concurrent threads to export delivery entities.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.EntityGenerator.IContentHubSettings.ExportEntitiesBufferSize">
+            <summary>
+            Gets the buffer size of export entities.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.EntityGenerator.IContentHubSettings.ExportPublishEventsBatchSize">
+            <summary>
+            Gets the batch size of export entities publish events.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.EntityGenerator.IContentHubSettings.LayoutServiceConfigName">
+            <summary>
+            Get the name of the layout service configuration
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.EntityGenerator.IContentHubSettings.GraphQLEndpointUrl">
+            <summary>
+            Gets the url for GraphQL endpoint.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.EntityGenerator.IContentHubSettings.DeliveryTransientFailureRetryCount">
+            <summary>
+            The retry count for occurring transient error when communicating with delivery endpoint
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.EntityGenerator.IContentHubSettings.DeliveryTransientFailureSleepTime">
+            <summary>
+            The time to wait before each retry when transient error occurs when communicating with delivery endpoint
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.EntityGenerator.IContentHubSettings.DeliveryCircuitBreakerAttemptsBeforeBreak">
+            <summary>
+            The maximum number of errors which change state of the circuit breaker to Opened. 
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.EntityGenerator.IContentHubSettings.DeliveryCircuitBreakerDurationOfBreak">
+            <summary>
+            The time to wait before trying to communicate with delivery endpoint after the circuit breaker change its state to Opened. 
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.EntityGenerator.IContentHubSettings.MaxPublishThreadCount">
+            <summary>
+            Maximum number of publish/signal threads
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.EntityGenerator.IContentHubSettings.MaxMetadataCacheSize">
+            <summary>
+            Maximum number of metadata entries cached during the publish
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.EntityGenerator.IContentHubSettings.CheckDeltaStatusBatchSize">
+            <summary>
+            Number of items delta check requests sent to Edge at one time
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.EntityGenerator.IContentHubSettings.AckCleanupTimeoutSeconds">
+            <summary>
+            Number of seconds to wait for the Ack monitor to complete. The default is 25
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.EntityGenerator.IContentHubSettings.AckWaitTimeoutSeconds">
+            <summary>
+            Number of seconds to wait for an Ack message before giving up. The default is 600 (10 minutes).
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.EntityGenerator.IContentHubSettings.DisableDatabaseCaches">
+            <summary>
+            Indicates the database cache is disabled during publishing
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.EntityGenerator.IContentHubSettings.MaxDependencyResolutionThreadCount">
+            <summary>
+            Number of threads used to resolve item dependencies.
+            </summary>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.EntityGenerator.IDeliveryEntityGenerator.GenerateAssociatedDeliveryEntitiesAsync(Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemPublishInfo,Sitecore.ExperienceEdge.Connector.Abstraction.Model.EntityPublishInfo,Sitecore.Data.Items.Item)">
+            <summary>
+            Generates one or more Delivery entity(s) per published Sitecore item. These are special purpose entities like Templates, Layouts, Fields, etc.
+            The Identifier for each generated entity must be unique across all entities, including the primary entity 
+            </summary>
+            <param name="itemPublishInfo">Provides information about the published Sitecore item.</param>
+            <param name="primaryEntity">The primary entit that will be sent to edge</param>
+            <param name="item">Reference to the Sitecore item that has been published. If null, means the item has been deleted from database.</param>
+            <returns>One or more Delivery entity(s)</returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.EntityGenerator.IDeliveryEntityGenerator.GeneratePrimaryDeliveryEntityAsync(Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemPublishInfo,Sitecore.Data.Items.Item)">
+            <summary>
+            Generates the primary entity that is sent to Edge. This is the entity that is returned when GraphQL queries for an Item
+            </summary>
+            <param name="itemPublishInfo">Item publish info the entity being generated</param>
+            <param name="item">The sitecore item</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.EntityGenerator.IDeliveryEntityGenerator.GeneratePrimaryEntityId(Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemPublishInfo)">
+            <summary>
+            Returns the primary entity identifier used by edge
+            </summary>
+            <param name="itemPublishInfo"></param>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.EntityGenerator.IDeliveryEntityGenerator.CreateItemInfo(System.Guid,System.String,System.String,System.Int32,System.Boolean,System.Boolean,Sitecore.ExperienceEdge.Connector.Abstraction.Model.FieldFallback.Status,System.Guid,Sitecore.Data.Items.Item)">
+            <summary>
+             Returns a the ItemInfo used by the publish pipeline to determine how to process the entity. This can be an ItemInfo, or a custom ItemInfo that
+             inhertis from ItemInfo
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.EntityGenerator.IDeliveryEntityGenerator.CanGenerateEntityForItem(Sitecore.Data.Items.Item)">
+            <summary>
+            Returns true if the generator can generate entities for the item sent to the generator
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.EntityGenerator.IDeliveryEntityGenerator.GeneratorSearchOrder">
+            <summary>
+            Returns the order generators are checked to see if they can handle an item. This allows custom generators a chance to override the default processing
+            for specific items. Higher values are searched first
+            </summary>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.EntityGenerator.ITemplateDataSource.RefreshAsync(System.String)">
+            <summary>
+            Load all templates from database and prepare their <see cref="T:Sitecore.ExperienceEdge.Connector.Abstraction.Model.TemplateMetadata"/>
+            </summary>
+            <param name="databaseName">The database name to read the templates from</param>
+            <returns>The task running the refresh</returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.EntityGenerator.ITemplateDataSource.GetTemplateMetaData(Sitecore.Data.ID)">
+            <summary>
+            Get the <see cref="T:Sitecore.ExperienceEdge.Connector.Abstraction.Model.TemplateMetadata"/> for the given template id
+            </summary>
+            <param name="templateId">The template id</param>
+            <returns>The <see cref="T:Sitecore.ExperienceEdge.Connector.Abstraction.Model.TemplateMetadata"/> </returns>
+        </member>
+        <member name="T:Sitecore.ExperienceEdge.Connector.Abstraction.EntityGenerator.LayoutService.ILayoutRenderer">
+            <summary>
+            Get the content of the layout of the item
+            </summary>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.EntityGenerator.LayoutService.ILayoutRenderer.Render(Sitecore.Data.Items.Item,Sitecore.ExperienceEdge.Connector.Abstraction.Model.PublishJobTarget)">
+            <summary>
+            Extract the layout content of the given <see cref="T:Sitecore.Data.Items.Item"/>
+            </summary>
+            <param name="item">The item to get its layout content</param>
+            <returns>The extract layout content</returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.IAccessTokenProvider.GetTokenAsync">
+            <summary>
+            Get current access token or request a new one from authentication server
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.ILanguageFallbackHierarchyDataSource.RefreshAsync(System.String)">
+            <summary>
+            Initialize the dependencies between the languages and their fallback languages.
+            </summary>
+            <param name="targetDatabaseName">The targeted database which used to read all the languages items under '/sitecore/system/Languages' </param>
+            <returns></returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.ILanguageFallbackHierarchyDataSource.GetLanguageHierarchy(System.String,System.String)">
+            <summary>
+            Get all dependent languages based on the published language 
+            </summary>
+            <param name="publishedLanguage">The item published language</param>
+            <param name="targetDatabaseName">The item published target database</param>
+            <returns>The list of dependent <see cref="T:Sitecore.ExperienceEdge.Connector.Abstraction.Model.LanguageFallbackHierarchy"/> languages</returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.ILanguageFallbackHierarchyDataSource.GetLanguageHierarchyToRoot(System.String,System.String,System.String)">
+            <summary>
+            Get ancestor languages from current to root language 
+            </summary>
+            <param name="currentLanguage">The current language to start from</param>
+            <param name="rootLanguage">The root language to stop at</param>
+            <param name="targetDatabaseName">The targeted database</param>
+            <returns>The list of ancestors between the current and root languages</returns>
+        </member>
+        <member name="T:Sitecore.ExperienceEdge.Connector.Abstraction.ISchemaGeneratorPipeline">
+            <summary>
+            Generates Edge schema
+            </summary>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.ISchemaGeneratorPipeline.RunGenerateSchemaPipeline">
+            <summary>
+            Runs the Edge schema generator pipeline and returns the generated Edge schema
+            </summary>
+            <returns>The generated Edge schema <see cref="T:Sitecore.CH.Delivery.EntitySchema.Schema"/></returns>
+        </member>
+        <member name="T:Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemInfo">
+            <summary>
+            Provides basic information about Sitecore item.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemInfo.Id">
+            <summary>
+            Gets the item id.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemInfo.Uri">
+            <summary>
+            Gets the item unique resource id.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemInfo.Language">
+            <summary>
+            Gets the language name of the item.
+            </summary>
+            <remarks>The value can be null.</remarks>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemInfo.Version">
+            <summary>
+            The version of the item to publish
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemInfo.ItemFallbackEnabled">
+            <summary>
+            Indicate if the item language fallback is enabled
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemInfo.IsItemFallbackVersion">
+            <summary>
+            Indicator if this item is a language fallback version
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemInfo.FieldFallbackStatus">
+            <summary>
+            The status of the field language fallback 
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemInfo.Type">
+            <summary>
+            Gets the <see cref="T:Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemType"/>.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemInfo.ParentId">
+            <summary>
+            Gets the id of parent item.
+            </summary>
+        </member>
+        <member name="T:Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemPublishInfo">
+            <summary>
+            Provides information about the item that has been published.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemPublishInfo.Item">
+            <summary>
+            Gets the action to take on the edge.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemPublishInfo.PublishAction">
+            <summary>
+            Gets the action to take on the edge.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemPublishInfo.ItemType">
+            <summary>
+            Gets the <see cref="T:Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemType"/>.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemPublishInfo.ItemId">
+            <summary>
+            Gets the item id.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemPublishInfo.Language">
+            <summary>
+            Gets the language name of the item.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemPublishInfo.PublishJobTarget">
+            <summary>
+            Holds common information for the publish job
+            </summary>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemPublishInfo.ChangeActionToDeleted(System.Boolean)">
+            <summary>
+            Changes the <see cref="P:Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemPublishInfo.PublishAction"/> to <value>Deleted</value>.
+            </summary>
+            <param name="allLanguages">If true, other language versions will be deleted as well.</param>
+        </member>
+        <member name="T:Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemType">
+            <summary>
+            Defines the types for item.
+            </summary>
+        </member>
+        <member name="T:Sitecore.ExperienceEdge.Connector.Abstraction.Model.PublishAction">
+            <summary>
+            Defines the actions for publishing.
+            </summary>
+        </member>
+        <member name="F:Sitecore.ExperienceEdge.Connector.Abstraction.Model.PublishAction.Update">
+            <summary>
+            Update the item on the edge action.
+            </summary>
+        </member>
+        <member name="F:Sitecore.ExperienceEdge.Connector.Abstraction.Model.PublishAction.Delete">
+            <summary>
+            Delete the item on the edge action.
+            </summary>
+        </member>
+        <member name="F:Sitecore.ExperienceEdge.Connector.Abstraction.Model.PublishAction.DeltaUpdate">
+            <summary>
+            Only update if the item is changed on edge
+            </summary>
+        </member>
+        <member name="F:Sitecore.ExperienceEdge.Connector.Abstraction.Model.PublishAction.DeleteAssociatedEntities">
+            <summary>
+            Only send a delete message for associated entities
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.Model.PublishJobTarget.DatabaseName">
+            <summary>
+            The source database used for the publishing.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.Model.PublishJobTarget.BatchNo">
+            <summary>
+            The batch number of the publish job
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.Model.PublishJobTarget.PublishTargetId">
+            <summary>
+            The Guid of the publish target
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.Model.PublishJobTarget.AllowPreviewVersion">
+            <summary>
+            If true, items in the preview state are used as the publishable version
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.Model.PublishJobTarget.TargetName">
+            <summary>
+            Name of the publishing target
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.Model.PublishJobTarget.PublishedLanguages">
+            <summary>
+            List of languages being published
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.Model.PublishJobTarget.IsSyncOnly">
+            <summary>
+            Gets or sets a value indicating whether it is a synchronization operation.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.Abstraction.Model.TemplateFieldInfo.OwnerTemplate">
+            <summary>
+            Gets the owner template item info.
+            </summary>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.SyncProvider.IXmcContentSyncProvider.UpsertAsync(Sitecore.ExperienceEdge.Connector.Abstraction.Model.XmcContentStore.XmcContentSyncState)">
+            <summary>
+            Inserts or updates a sync state row (EntityIdentifier + EntityCulture + EntityType are the natural key).
+            </summary>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.SyncProvider.IXmcContentSyncProvider.UpsertAllAsync(System.Collections.Generic.IReadOnlyList{Sitecore.ExperienceEdge.Connector.Abstraction.Model.XmcContentStore.XmcContentSyncState})">
+            <summary>
+            Inserts or updates sync state rows.
+            </summary>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.SyncProvider.IXmcContentSyncProvider.GetAsync(Sitecore.ExperienceEdge.Connector.Abstraction.Model.XmcContentStore.XmcContentSyncStateKey)">
+            <summary>
+            Gets a single sync state row by key (EntityIdentifier + EntityCulture + EntityType).
+            </summary>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.SyncProvider.IXmcContentSyncProvider.GetAllAsync(System.Collections.Generic.IReadOnlyList{Sitecore.ExperienceEdge.Connector.Abstraction.Model.XmcContentStore.XmcContentSyncStateKey})">
+            <summary>
+            Gets multiple sync state row by keys.
+            </summary>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.SyncProvider.IXmcContentSyncProvider.DeleteAsync(Sitecore.ExperienceEdge.Connector.Abstraction.Model.XmcContentStore.XmcContentSyncStateKey)">
+            <summary>
+            Deletes a row by key (EntityIdentifier + EntityCulture + EntityType).
+            </summary>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.Abstraction.SyncProvider.IXmcContentSyncProvider.DeleteAllAsync(System.Collections.Generic.IReadOnlyList{Sitecore.ExperienceEdge.Connector.Abstraction.Model.XmcContentStore.XmcContentSyncStateKey})">
+            <summary>
+            Deletes rows by keys.
+            </summary>
+        </member>
+    </members>
+</doc>

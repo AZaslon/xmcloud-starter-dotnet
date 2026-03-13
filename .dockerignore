@@ -1,6 +1,5 @@
 # folders
 .git
-.github
 .gitignore
 .vs
 .config
@@ -10,6 +9,11 @@ docker
 packages
 **/bin/
 **/obj/
+**/out/
+**/node_modules/
+**/.generated/
+**/.next*/
+**/.vscode/
 **/coverage/
 
 # files
@@ -17,7 +21,7 @@ packages
 docker-compose*
 **/*.md
 *.ps1
+scjssconfig.json
 **/*.yml
 **/*.module.json
 sitecore.json
-xmcloud.build.json

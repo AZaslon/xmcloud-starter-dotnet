@@ -1,10 +1,47 @@
 services:
+  # A Windows-based nodejs base image
+  nodejs:
+    image: ${REGISTRY}${COMPOSE_PROJECT_NAME}-nodejs:${VERSION:-latest}
+    build:
+      context: ./docker/build/nodejs
+      args:
+        PARENT_IMAGE: ${NODEJS_PARENT_IMAGE}
+        NODEJS_VERSION: ${NODEJS_VERSION}
+    deploy:
+      replicas: 0
+
+  rendering-nextjs:
+    image: ${REGISTRY}${COMPOSE_PROJECT_NAME}-rendering-nextjs:${VERSION:-latest}
+    build:
+      context: ./docker/build/rendering-nextjs
+      target: ${BUILD_CONFIGURATION}
+      args:
+        PARENT_IMAGE: ${REGISTRY}${COMPOSE_PROJECT_NAME}-nodejs:${VERSION:-latest}
+    volumes:
+      - ../examples/basic-nextjs:C:\app
+    environment:
+      SITECORE_API_HOST: "http://cm"
+      NEXTJS_DIST_DIR: ".next-container"
+      PUBLIC_URL: "https://${RENDERING_HOST_NEXTJS}"
+      SITECORE_EDITING_SECRET: ${SITECORE_EDITING_SECRET}
+      SITECORE_API_KEY: "${SITECORE_API_KEY_APP_STARTER}"
+      DISABLE_SSG_FETCH: ${DISABLE_SSG_FETCH}
+    depends_on:
+      - cm
+      - nodejs
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.rendering-secure-nextjs.entrypoints=websecure"
+      - "traefik.http.routers.rendering-secure-nextjs.rule=Host(`${RENDERING_HOST_NEXTJS}`)"
+      - "traefik.http.routers.rendering-secure-nextjs.tls=true"
+      - "traefik.http.services.rendering-nextjs.loadbalancer.server.port=3000"
 
   # Mount the Traefik configuration and certs.
   traefik:
-    image: ${TRAEFIK_IMAGE}-${EXTERNAL_IMAGE_TAG_SUFFIX}
     volumes:
       - ./docker/traefik:C:/etc/traefik
+    depends_on:
+      - rendering-nextjs
 
   # Mount our SQL data folder and use our custom image with the Headless Services (JSS)
   # module data added. See Dockerfile for details.
@@ -22,42 +59,6 @@ services:
         source: .\docker\data\solr
         target: c:\data
 
-  # Container used to run the ASP.NET Core Starter application.
-  aspnet-core-starter:
-    image: ${REGISTRY}${COMPOSE_PROJECT_NAME}-aspnet-core-starter:${VERSION:-latest}
-    build:
-      context: ../
-      dockerfile: ./local-containers/docker/build/aspnet-core-starter/Dockerfile
-      args:
-        BASE_IMAGE: ${NETCORE_BUILD_IMAGE}-${EXTERNAL_IMAGE_TAG_SUFFIX}
-        PROJECT_FILE: ./headapps/aspnet-core-starter/aspnet-core-starter.csproj
-    environment:
-      ASPNETCORE_ENVIRONMENT: "Development"
-      ASPNETCORE_URLS: "http://*:80"
-      DOTNET_WATCH_RESTART_ON_RUDE_EDIT: true
-      DOTNET_WATCH_SUPPRESS_LAUNCH_BROWSER: true
-      MVP_RENDERING_EDITING_HOST_URI: "http://aspnet-core-starter"
-      Sitecore__EnableEditingMode: "true" 
-      Sitecore__EnableLocalContainer: "true"
-      Sitecore__LocalContainerLayoutUri: "http://cm/sitecore/api/graph/edge"
-      Sitecore__EdgeContextId: ${SITECORE_API_KEY_ASPNETCORE_STARTER}
-      Sitecore__EditingSecret: ${EDITING_SECRET}
-      Sitecore__DefaultSiteName: ${SITE_NAME}
-    ports:
-      - "80:80"
-    command: ["dotnet", "watch", "run", -v, "--urls", "http://*:80"]
-    volumes:
-      - .\..\headapps\aspnet-core-starter:c:\app
-      - c:\app\obj
-      - c:\app\bin
-    depends_on:
-      - cm
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.aspnet-core-starter-secure.entrypoints=websecure"
-      - "traefik.http.routers.aspnet-core-starter-secure.rule=Host(`${RENDERING_HOST}`)"
-      - "traefik.http.routers.aspnet-core-starter-secure.tls=true"   
-
   # Use our custom CM image with added modules and solution code.
   # Folders are mounted below for code deployment and log output. See Dockerfile for details.
   # Configure for a mounted license file instead of using SITECORE_LICENSE.
@@ -74,10 +75,9 @@ services:
       - ${HOST_LICENSE_FOLDER}:c:\license
     environment:
       SITECORE_LICENSE_LOCATION: c:\license\license.xml
-      RENDERING_HOST_INTERNAL_URI: ${RENDERING_HOST_INTERNAL_URI}
-      JSS_DEPLOYMENT_SECRET_ASPNETCORE: ${JSS_DEPLOYMENT_SECRET_ASPNETCORE_STARTER}
-      SITECORE_JSS_EDITING_SECRET: ${EDITING_SECRET}
-      SITECORE_EDITING_HOST_PUBLIC_HOST: "${RENDERING_HOST}"
+      RENDERING_HOST_INTERNAL_URI: "http://rendering-nextjs:3000"
+      SITECORE_JSS_EDITING_SECRET: ${SITECORE_EDITING_SECRET}
+      SITECORE_EDITING_HOST_PUBLIC_HOST: "${RENDERING_HOST_NEXTJS}"
       SITECORE_GraphQL_CORS: ${SITECORE_GRAPHQL_CORS}
       SITECORE_Pages_Client_Host: ${SITECORE_Pages_Client_Host}
       SITECORE_Pages_CORS_Allowed_Origins: ${SITECORE_Pages_CORS_Allowed_Origins}

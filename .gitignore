@@ -11,12 +11,9 @@
 *.itempackage
 *.sicpackage
 
-# IDE Settings
-.vscode
 
 #Ignore thumbnails created by Windows
 Thumbs.db
-
 #Ignore files built by Visual Studio
 *.obj
 *.exe
@@ -44,9 +41,11 @@ obj/
 _ReSharper*/
 [Tt]est[Rr]esult*
 .vs/
-
 #Nuget packages folder
 packages/
 
-# developer configs
-appsettings.Development.json
+#Ignore system files
+.DS_Store
+
+# VS Code settings
+.vscode/

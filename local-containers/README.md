@@ -1,4 +1,4 @@
-# XM Cloud ASP.NET Core Starter Kit - Disconnected offline mode
+# XM Cloud Next.js Starter Kit - Disconnected offline mode
 Below are the instructions for how to mock a small subset of the XM Cloud Application elements in offline mode using Docker. This can allow for a disconnected development, however it is recommend to work in the default connected mode for the best experience.
 
 ## Prerequisites
@@ -25,11 +25,6 @@ After you have initialised the repository you can use the `./local-containers/sc
 ```ps1
 ./local-containers/scripts/up.ps1
 ```
-
-### Create a Site Collection & Site
-Once the containers are running you can create a new Site Collection and Site by following the guide on the [documentation site](https://doc.sitecore.com/xmc/en/developers/xm-cloud/create-a-headless-site-collection-and-site.html)
-
-You can either use the default Site Name of `aspnet-core-starter` or you can change the `SITE_NAME` parameter in the `./local-containers/.env` file to match the Site Name you created.
 
 ### Stopping the Containers
 Once you have finished you can use the `./local-containers/scripts/down.ps1` script to stop the containers:

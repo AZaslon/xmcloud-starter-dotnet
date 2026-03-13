@@ -1,0 +1,727 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sitecore.ExperienceEdge.Connector.ContentHubDelivery</name>
+    </assembly>
+    <members>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Abstraction.IEntityLoader.LoadAssociatedAsync(Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemPublishInfo,Sitecore.ExperienceEdge.Connector.Abstraction.Model.EntityPublishInfo)">
+            <summary>
+            Load <see cref="T:System.Collections.Generic.IReadOnlyCollection`1"/> for a given item in <see cref="T:Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemPublishInfo"/>/>
+            </summary>
+            <param name="itemPublishInfo">The item to load its <see cref="T:System.Collections.Generic.IReadOnlyCollection`1"/></param>
+            <returns>The loaded <see cref="T:System.Collections.Generic.IReadOnlyCollection`1"/> message</returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Abstraction.IEntityLoader.LoadPrimaryAsync(Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemPublishInfo)">
+            <summary>
+            Load <see cref="T:Sitecore.ExperienceEdge.Connector.Abstraction.Model.EntityPublishInfo"/> for a given item in <see cref="T:Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemPublishInfo"/>/>
+            </summary>
+            <param name="itemPublishInfo">The item to load its <see cref="T:System.Collections.Generic.IReadOnlyCollection`1"/></param>
+            <returns>The loaded <see cref="T:Sitecore.ExperienceEdge.Connector.Abstraction.Model.EntityPublishInfo"/> message</returns>
+        </member>
+        <member name="T:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.ContentSync.DataUriBucketDictionary`1">
+            <summary>
+            Represents a collection of DataUris and values stored in buckets based on the ID of the Item that DataUri refer to.
+            </summary>
+            <typeparam name="TValue">The type of values in the dictionary</typeparam>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.ContentSync.DataUriBucketDictionary`1.Item(Sitecore.Data.DataUri)">
+            <summary>
+            Gets or sets the value associated with the specified DataUri key inside the bucket
+            </summary>
+            <param name="uri">The key of the value to get or set.</param>
+            <returns>
+            The value associated with the specified key. If the specified key is not found 
+            a set operation creates a new element with the specified key.
+            </returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.ContentSync.DataUriBucketDictionary`1.Add(Sitecore.Data.DataUri,`0)">
+            <summary>
+            Adds the specified key and value to the dictionary. 
+            </summary>
+            <param name="key">The key of the element to add.</param>
+            <param name="value">The value of the element to add. The value can be null for reference types.</param>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.ContentSync.DataUriBucketDictionary`1.ContainsKey(Sitecore.Data.DataUri)">
+            <summary>
+            Determines whether the collections contains the specified key.
+            </summary>
+            <param name="key"> The key to locate in the collections.</param>
+            <returns>true if the collection contains an element with the specified key; otherwise, false.</returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.ContentSync.DataUriBucketDictionary`1.ContainsAny(Sitecore.Data.ID,System.Func{System.Collections.Generic.KeyValuePair{Sitecore.Data.DataUri,`0},System.Boolean})">
+            <summary>
+            Determines whether any element of the collection satisfies the condition.
+            </summary>
+            <param name="bucketId">The bucket id to search in.</param>
+            <param name="predicate">A function to test each element for a condition.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.ContentSync.DataUriBucketDictionary`1.RemoveAll(Sitecore.Data.ID,System.Func{Sitecore.Data.DataUri,System.Boolean})">
+            <summary>
+            Removes all the elements of the collection satisfies the condition under the given bucket id.
+            </summary>
+            <param name="bucketId">Bucket id</param>
+            <param name="predicate">A function to test each element for a condition.</param>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.ContentSync.DataUriBucketDictionary`1.First(Sitecore.Data.ID,System.Func{System.Collections.Generic.KeyValuePair{Sitecore.Data.DataUri,`0},System.Boolean})">
+            <summary>
+            Returns the first element of the collection that satisfies a specified condition under the given bucket id.
+            </summary>
+            <param name="bucketId">Bucket id</param>
+            <param name="predicate"></param>
+            <returns>A function to test each element for a condition.</returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.ContentSync.DataUriBucketDictionary`1.ExtractValues">
+            <summary>
+            Projects each value of each bucket into an <see cref="T:System.Collections.Generic.IEnumerable`1"/>.
+            </summary>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> of all the values from all the buckets</returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.ContentSync.DataUriBucketDictionary`1.TryGetValue(Sitecore.Data.DataUri,`0@)">
+            <summary>
+            Get the value from dictionary
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Delivery.Ack.EdgePublishAckManager.StartAckProcessingAsync(Sitecore.ExperienceEdge.Connector.Abstraction.Model.PublishJobTarget)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Delivery.Ack.EdgePublishAckManager.CompleteAckProcessingAsync(Sitecore.ExperienceEdge.Connector.Abstraction.Model.PublishJobTarget)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Delivery.Ack.EdgePublishAckManager.GetNextAckBatchMessage(Sitecore.ExperienceEdge.Connector.Abstraction.Model.PublishJobTarget)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Delivery.Ack.EdgePublishAckUnaryManager.StartAckProcessingAsync(Sitecore.ExperienceEdge.Connector.Abstraction.Model.PublishJobTarget)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Delivery.Ack.EdgePublishAckUnaryManager.CompleteAckProcessingAsync(Sitecore.ExperienceEdge.Connector.Abstraction.Model.PublishJobTarget)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Delivery.Ack.EdgePublishAckUnaryManager.GetNextAckBatchMessage(Sitecore.ExperienceEdge.Connector.Abstraction.Model.PublishJobTarget)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Delivery.Ack.IEdgePublishAckManager.StartAckProcessingAsync(Sitecore.ExperienceEdge.Connector.Abstraction.Model.PublishJobTarget)">
+            <summary>
+            Starts publishing acks
+            </summary>
+            <param name="publishJobTarget"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Delivery.Ack.IEdgePublishAckManager.CompleteAckProcessingAsync(Sitecore.ExperienceEdge.Connector.Abstraction.Model.PublishJobTarget)">
+            <summary>
+            Completes processing of ack messages
+            </summary>
+            <param name="publishJobTarget"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Delivery.Ack.IEdgePublishAckManager.GetNextAckBatchMessage(Sitecore.ExperienceEdge.Connector.Abstraction.Model.PublishJobTarget)">
+            <summary>
+            Retrieves the next ack batch messagefrom the queue
+            </summary>
+            <param name="publishJobTarget"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Delivery.Ack.IEdgePublishAckManager.SendAckBatchStatusAsync(Sitecore.ExperienceEdge.Connector.Abstraction.Model.PublishJobTarget,Sitecore.CH.Delivery.Publishing.Messages.Status)">
+            <summary>
+            Updates Edge with the status of the processed message buffer
+            </summary>
+            <param name="publishJobTarget"></param>
+            <param name="success"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Delivery.Export.Schema.ISchemaExporter">
+            <summary>
+            Provides a worker that exports GQL schema to the delivery channel
+            </summary>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Delivery.Export.Schema.ISchemaExporter.Export(System.String,Sitecore.ExperienceEdge.Connector.Abstraction.Model.PublishJobTarget)">
+            <summary>
+            Exports the graph schema for the given database to the delivery channel
+            </summary>
+            <param name="databaseName">The name of database to export schema for.</param>
+            <returns>Export task to track on completion.</returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Delivery.PublishEvent.IEdgePublishEvent.PublishSchemaSignalAsync(System.String,Sitecore.ExperienceEdge.Connector.Abstraction.Model.PublishJobTarget)">
+            <summary>
+            Send a signal to notify about published schema changes
+            </summary>
+            <param name="reference">The published schema reference</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Delivery.PublishEvent.IEdgePublishEvent.PublishEntitySignalsAsync(Sitecore.ExperienceEdge.Connector.Abstraction.Model.EntityPublishInfo[])">
+            <summary>
+            Send a signal to notify about published entity changes
+            </summary>
+            <param name="entityPublishInfo">The published entity with its references</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Delivery.PublishEvent.IEdgePublishEvent.PublishJobStartSignal(System.String,Sitecore.ExperienceEdge.Connector.Abstraction.Model.PublishJobTarget)">
+            <summary>
+            Send a signal to notify about publishing job started
+            </summary>
+            <param name="jobId">The started job id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Delivery.PublishEvent.IEdgePublishEvent.PublishJobEndSignal(System.String,Sitecore.CH.Delivery.Publishing.Messages.Status,System.String,Sitecore.ExperienceEdge.Connector.Abstraction.Model.PublishJobTarget)">
+            <summary>
+            Send a signal to notify about job publishing ended
+            </summary>
+            <param name="jobId">The finished job id</param>
+            <param name="status">The status of finished job <see cref="T:Sitecore.CH.Delivery.Publishing.Messages.Status"/></param>
+            <returns></returns>
+        </member>
+        <member name="T:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Delivery.Publish.Entity.IEntityPublisher">
+            <summary>
+            Responsible of delivering the published entities to experience edge.
+            </summary>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Delivery.Publish.Entity.IEntityPublisher.PublishAsync(Sitecore.ExperienceEdge.Connector.Abstraction.Model.EntityPublishInfo)">
+            <summary>
+            Publishes a single entity to experience edge.
+            </summary>
+            <param name="publishContext">Provides information about what to deliver.</param>
+            <returns>The published <see cref="T:Sitecore.ExperienceEdge.Connector.Abstraction.Model.EntityPublishInfo"/> with its reference</returns>
+        </member>
+        <member name="T:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Delivery.Publish.Schema.ISchemaPublisher">
+            <summary>
+            Publish content GraphQL schema to the delivery platform
+            </summary>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Delivery.Publish.Schema.ISchemaPublisher.PublishAsync(System.String,Sitecore.ExperienceEdge.Connector.Abstraction.Model.PublishJobTarget)">
+            <summary>
+            Publish content GraphQL schema to the delivery platform.
+            </summary>
+            <param name="schemaString">The content GraphQL schema as generated by content schema provider.</param>
+            <returns>Awaitable task.</returns>
+        </member>
+        <member name="T:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Delivery.Schema.ISchemaBuilder">
+            <summary>
+            Builds content GraphQL schema
+            </summary>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Delivery.Schema.ISchemaBuilder.BuildSchema(System.String)">
+            <summary>
+            Build content GraphQL schema for a given database.
+            </summary>
+            <param name="databaseName">Database to build schema for.</param>
+            <returns>GraphQL schema.</returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Dependencies.Compute.BaseItemDependencyCalculator.GetDependencyCollection(Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemPublishInfo,System.String)">
+            <summary>
+            Retrieves a dependency collection from the metadata
+            </summary>
+            <param name="itemPublishInfo"></param>
+            <param name="dependecyListName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Dependencies.Compute.BaseItemDependencyCalculator.EnsureDepdendencyCollectionDistinct(System.Collections.Generic.List{System.String})">
+            <summary>
+            Ensures there are no duplicate items in the depdencecy collection
+            </summary>
+            <param name="dependencyCollection"></param>
+        </member>
+        <member name="T:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.DirectPublish.Delivery.Export.Blocks.CheckDeltaPublishBlock">
+            <summary>
+            This block checks the delta publish status of an item using the IItemPublishComparisonStatus service if the item status is "DeltaUpdate".
+            If the IItemPublishComparisonStatus service indicates the item is "dirty", the publish status will be changed to "Update", otherwise it is converted to "Skip"
+            </summary>
+        </member>
+        <member name="T:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.DirectPublish.Delivery.Export.Blocks.CollectItemsToDeleteBlock">
+            <summary>
+            When a published entity is deleted, children of the item need to be deleted. This block will generate
+            the delete update messages needed to delete known published children
+            </summary>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.DirectPublish.Delivery.Export.Blocks.CollectItemsToDeleteBlock.CollectChildrenToDelete(System.Collections.Concurrent.ConcurrentQueue{System.Collections.Generic.IEnumerable{System.Guid}},System.Collections.Concurrent.ConcurrentBag{Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemPublishInfo},System.Collections.Generic.IDictionary{System.Guid,System.Collections.Generic.IEnumerable{System.Guid}},System.String,Sitecore.ExperienceEdge.Connector.Abstraction.Model.PublishJobTarget)">
+            <summary>
+            Recursively descend into the children of an item to determine which children to delete
+            </summary>
+        </member>
+        <member name="T:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.DirectPublish.Delivery.Export.Blocks.CreateEntityBatchBlock">
+            <summary>
+            This block collects an array of entity publish infos and merges them into a single entity batch publish info so they can be sent to Edge more efficiently
+            </summary>
+        </member>
+        <member name="T:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.DirectPublish.Delivery.Export.Blocks.Dependency.AddLanguageDependenciesBlock">
+            <summary>
+            This block creates publish messages for items in different languages that depend on the item being published for the values due to language fallback
+            </summary>
+        </member>
+        <member name="T:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.DirectPublish.Delivery.Export.Blocks.Dependency.RemoveDuplicateItemsBlock">
+            <summary>
+            This block removes items with the same ID and Language going to a specific publishing target.
+            WARNING: This class MUST be single threaded. It is purposely designed as not thread safe.
+            We are using an input buffer and relying on TPL threading to prevent concurrency in here.
+            </summary>
+        </member>
+        <member name="T:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.DirectPublish.Delivery.Export.Blocks.LoadAssociatedEntitiesBlock">
+            <summary>
+            This block creates any additional entities that need to be sent to edge along with the primary entity. These would be entities like layout entities or media entities.
+            </summary>
+        </member>
+        <member name="T:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.DirectPublish.Delivery.Export.Blocks.LoadPrimaryEntityBlock">
+            <summary>
+            This block loads an entity from the database based on the contents of the item publish info.
+            </summary>
+        </member>
+        <member name="T:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.DirectPublish.Delivery.Export.Blocks.RemoveOutdatedAssociatedEntitiesBlock">
+            <summary>
+            This block removes outdated entities from Edge
+            </summary>
+        </member>
+        <member name="T:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.DirectPublish.Delivery.Export.Blocks.RemoveUnnecessaryDeletesBlock">
+            <summary>
+            Check edge to see if an item exists. If it does, then it should be deleted otherwise the delete is skipped
+            </summary>
+        </member>
+        <member name="T:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.DirectPublish.Delivery.Export.Blocks.UpdatePublishingStatusBlock">
+            <summary>
+            This block processes the signal responses and updates publishing statistics
+            </summary>
+        </member>
+        <member name="T:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.DirectPublish.Delivery.Export.Blocks.UploadMediaBlock">
+            <summary>
+            This block looks for an updated or deleted media item and upload it. The media item is re-created with the URL to the uploaded media and passed along the pipeline
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Exceptions.WorkerErrorData.TotalCount">
+            <summary>
+            Gets or sets the total count.
+            </summary>
+            <value>
+            The total count.
+            </value>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Exceptions.WorkerErrorData.ProcessedCount">
+            <summary>
+            Gets or sets the processed count.
+            </summary>
+            <value>
+            The processed count.
+            </value>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Exceptions.WorkerErrorData.UnprocessedCount">
+            <summary>
+            Gets the unprocessed count.
+            </summary>
+            <value>
+            The unprocessed count.
+            </value>
+        </member>
+        <member name="T:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Exceptions.WorkerOperationException">
+            <summary>
+            Exception when operation with layout worker service fails.
+            </summary>
+            <seealso cref="T:System.Exception" />
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Exceptions.WorkerOperationException.ErrorData">
+            <summary>
+            Gets the error data.
+            </summary>
+            <value>
+            The error data.
+            </value>
+        </member>
+        <member name="T:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Extensions.SchemaConverterExtension">
+            <summary>
+            Converts <see cref="T:Sitecore.CH.Delivery.EntitySchema.Schema"/> to <see cref="T:Sitecore.CH.Delivery.Publishing.Messages.Schema"/>
+            </summary>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Extensions.SchemaConverterExtension.ConvertToPublishingSchema(Sitecore.CH.Delivery.EntitySchema.Schema)">
+            <summary>
+            Converts <see cref="T:Sitecore.CH.Delivery.EntitySchema.Schema"/> to <see cref="T:Sitecore.CH.Delivery.Publishing.Messages.Schema"/>
+            </summary>
+            <param name="schema"></param>
+            <returns>Converted schema  <see cref="T:Sitecore.CH.Delivery.Publishing.Messages.Schema"/></returns>
+        </member>
+        <member name="T:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Extensions.SchemaExtensions">
+            <summary>
+            Adds Metadata
+            </summary>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.EdgeItemPublishStatus.GetItemsPublishingStatusAsync(System.Collections.Generic.IEnumerable{Sitecore.ExperienceEdge.Connector.Abstraction.Model.ItemPublishInfo})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.IBaseEdgePublishClient.OpenClient">
+            <summary>
+            Open connection to edge publish client
+            </summary>
+            <returns>The awaitable <see cref="T:System.Threading.Tasks.Task"/></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.IBaseEdgePublishClient.CloseClient" -->
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.IEdgePublishAckClient.SendSignalAckBatch(Sitecore.CH.Delivery.Publishing.Messages.SignalAckBatch)">
+            <summary>
+            Sends ack messages to edge for the entitys in the batch
+            </summary>
+            <param name="acks"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.IEdgePublishAckClient.GetNextAckBatch(Sitecore.CH.Delivery.Publishing.Messages.SignalAckBatch)">
+            <summary>
+            Gets the nexct Ack message
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.IEdgePublishAckClientFactory.ResetAsync">
+            <summary>
+            Clears all cached connections in the event an error occurs. This forces the next access to re-initialize the connections
+            </summary>
+        </member>
+        <member name="T:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.IEdgePublishClient">
+            <summary>
+            The client to use to communicate with the experience edge
+            </summary>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.IEdgePublishClient.UploadEntity(Sitecore.CH.Delivery.Publishing.Messages.Entity)">
+            <summary>
+            Upload <see cref="T:Sitecore.CH.Delivery.Publishing.Messages.Entity"/> to the experience edge
+            </summary>
+            <param name="entity">The <see cref="T:Sitecore.CH.Delivery.Publishing.Messages.Entity"/>to be uploaded</param>
+            <returns>The awaitable <see cref="T:System.Threading.Tasks.Task"/> with the <see cref="T:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Model.PublishResponse"/></returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.IEdgePublishClient.UploadMedia(Sitecore.CH.Delivery.Publishing.Messages.Media)">
+            <summary>
+            Upload <see cref="T:Sitecore.CH.Delivery.Publishing.Messages.Media"/> to the experience edge
+            </summary>
+            <param name="media">The <see cref="T:Sitecore.CH.Delivery.Publishing.Messages.Media"/> to be uploaded</param>
+            <returns>The awaitable <see cref="T:System.Threading.Tasks.Task"/> with the <see cref="T:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Model.PublishResponse"/></returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.IEdgePublishClient.UploadSchema(Sitecore.CH.Delivery.Publishing.Messages.Schema)">
+            <summary>
+            Upload <see cref="T:Sitecore.CH.Delivery.Publishing.Messages.Schema"/> to the experience edge
+            </summary>
+            <param name="schema">The <see cref="T:Sitecore.CH.Delivery.Publishing.Messages.Schema"/> to be uploaded</param>
+            <returns>The awaitable <see cref="T:System.Threading.Tasks.Task"/> with the <see cref="T:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Model.PublishResponse"/></returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.IEdgePublishClient.SendSignals(Sitecore.CH.Delivery.Publishing.Messages.SignalBatch)">
+            <summary>
+            Send signals to edge to notify about published changes
+            </summary>
+            <param name="signals">The <see cref="T:Sitecore.CH.Delivery.Publishing.Messages.SignalBatch"/> to be sent</param>
+            <returns>The awaitable <see cref="T:System.Threading.Tasks.Task"/> with the <see cref="T:System.Collections.Generic.IEnumerable`1"/></returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.IEdgePublishClient.UploadEntityBatch(Sitecore.CH.Delivery.Publishing.Messages.EntityBatch)">
+            <summary>
+            Uploads a batch of entities to edge
+            </summary>
+            <param name="entityBatch"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.IEdgePublishClient.GetEntityMetadataAsync(System.Collections.Generic.IEnumerable{System.String},System.String)">
+            <summary>
+            Retrieves metadata for a list of entitity identifiers
+            </summary>
+            <param name="entities">List of entities</param>
+            <param name="culture">Culture to retrieve</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.IEdgePublishClient.SearchEntityByMetadataAsync(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Int32,System.String)">
+            <summary>
+            Searches Edge for entities with specific metadata
+            </summary>
+            <param name="metadataToMatch"></param>
+            <param name="culture"></param>
+            <param name="keys"></param>
+            <param name="pageSize"></param>
+            <param name="cursor"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.IEdgePublishClientFactory.Reset">
+            <summary>
+            Clears all cached connections in the event an error occurs. This forces the next access to re-initialize the connections
+            </summary>
+        </member>
+        <member name="T:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.MetadataProvider.SqlMetadataProvider">
+            <summary>
+            SQL backed metadata provider.
+            </summary>
+        </member>
+        <member name="T:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.Tenant.JwtTokenHelper">
+            <summary>
+            Authorization token parser
+            </summary>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.Tenant.JwtTokenHelper.ExtractTenantInfo(System.String)">
+            <summary>
+            Extract tenant info from Authorization token
+            </summary>
+            <param name="token">JWT token</param>
+            <returns>Tenant info <see cref="T:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.Tenant.TenantInfo"/></returns>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="T:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.Upload.IXmcMediaClient">
+            <summary>
+            Service for uploading images to the Content Services API
+            </summary>
+        </member>
+        <member name="T:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.Upload.XmcMediaClient">
+            <summary>
+            Service for uploading images to the Content Services API
+            </summary>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.Upload.XmcMediaClient.Dispose(System.Boolean)">
+            <summary>
+            Disposes the resources used by this instance
+            </summary>
+            <param name="disposing">True if called from Dispose(), false if called from the finalizer</param>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.Upload.XmcMediaClient.GenerateMediaLinkAsync(System.String,System.String,System.Int32)">
+            <summary>
+            Generates a media upload link for the specified file name, content type and content length
+            </summary>
+            <param name="fileName">The name of the file to upload</param>
+            <param name="contentType">The MIME type of the content to upload</param>
+            <param name="contentLength">The length of the content in bytes</param>
+            <returns>A response containing the upload link and file ID</returns>
+            <exception cref="T:System.InvalidOperationException">Thrown when the link generation fails or returns empty values</exception>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.Upload.XmcMediaClient.UploadContentAsync(System.String,System.Byte[])">
+            <summary>
+            Uploads file content to the provided MMS link
+            </summary>
+            <param name="mmsLink">The MMS link to upload the file to</param>
+            <param name="fileContent">The binary content of the file</param>
+            <exception cref="T:System.InvalidOperationException">Thrown when the upload fails</exception>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.XmcContent.Models.XmcContentSystemInfo.Type">
+            <summary>
+            Gets or sets the type of the created resource.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.XmcContent.Models.XmcContentSystemInfo.Hash">
+            <summary>
+            Gets or sets the date time that the resource was created.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.XmcContent.Models.XmcContentSystemInfo.CreatedAt">
+            <summary>
+            Gets or sets the date time that the resource was created.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.XmcContent.Models.XmcContentSystemInfo.UpdatedAt">
+            <summary>
+            Gets or sets the date time that the resource was updated.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.XmcContent.Models.XmcContentSystemInfo.Status">
+            <summary>
+            Gets or sets the Item state.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.XmcContent.Models.XmcContentSystemInfo.ContentType">
+            <summary>
+            Gets or sets the content type of the resource.
+            </summary>
+        </member>
+        <member name="T:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.XmcContent.Models.XmcContentTaskState">
+            <summary>
+            Defines the possible states of a task instance.
+            </summary>
+        </member>
+        <member name="F:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.XmcContent.Models.XmcContentTaskState.Created">
+            <summary>
+            The task has been created.
+            </summary>
+        </member>
+        <member name="F:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.XmcContent.Models.XmcContentTaskState.Pending">
+            <summary>
+            The task is pending.
+            </summary>
+        </member>
+        <member name="F:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.XmcContent.Models.XmcContentTaskState.InProgress">
+            <summary>
+            The task is in progress.
+            </summary>
+        </member>
+        <member name="F:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.XmcContent.Models.XmcContentTaskState.Completed">
+            <summary>
+            The task has been completed.
+            </summary>
+        </member>
+        <member name="F:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.XmcContent.Models.XmcContentTaskState.Failed">
+            <summary>
+            The task has failed.
+            </summary>
+        </member>
+        <member name="F:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.XmcContent.Models.XmcContentTaskState.Stopped">
+            <summary>
+            The task instance has been stopped.
+            </summary>
+        </member>
+        <member name="F:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.XmcContent.Models.XmcContentTaskState.Waiting">
+            <summary>
+            The task is waiting for an external event or callback.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.XmcContent.Models.XmcContentTaskStatistics.Total">
+            <summary>
+            Gets or sets the total number of items.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.XmcContent.Models.XmcContentTaskStatistics.Processed">
+            <summary>
+            Gets or sets the number of processed items.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.XmcContent.Models.XmcContentTaskStatistics.Succeeded">
+            <summary>
+            Gets or sets the number of succeeded items.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.XmcContent.Models.XmcContentTaskStatistics.Ignored">
+            <summary>
+            Gets or sets the number of ignored items.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.XmcContent.Models.XmcContentTaskStatistics.Failed">
+            <summary>
+            Gets or sets the number of failed items.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.XmcContent.Models.XmcContentTaskStatus.State">
+            <summary>
+            Gets or sets the state of the workset execution.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.XmcContent.Models.XmcContentTaskStatus.Description">
+            <summary>
+            Gets or sets the description of the workset execution status.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.XmcContent.Models.XmcContentTaskSystemInfo.CreatedAt">
+            <summary>
+            Gets or sets the date time that the resource was created.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.XmcContent.Models.XmcContentTaskSystemInfo.CreatedBy">
+            <summary>
+            Gets or sets the info about the user that created the resource.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.XmcContent.Models.XmcContentTaskSystemInfo.UpdatedAt">
+            <summary>
+            Gets or sets the date time that the resource was updated.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.XmcContent.Models.XmcContentTaskSystemInfo.UpdatedBy">
+            <summary>
+            Gets or sets the info about the user that updated the resource.
+            </summary>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.XmcContent.XmcContentHttpClient.#ctor(System.Net.Http.HttpMessageHandler,Sitecore.Abstractions.BaseLog)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.XmcContent.XmcContentHttpClient" /> class.
+            </summary>
+            <param name="handler">The http client message handler.</param>
+            <param name="log">The logger.</param>
+        </member>
+        <member name="M:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.Infrastructure.XmcContent.XmcContentHttpClient.SendAsync(Sitecore.Common.HttpClient.RequestData,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.PublishingApi.Models.Common.ItemModel.Id">
+            <summary>
+            Gets or initializes the ID of the item.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.PublishingApi.Models.Common.ItemModel.Type">
+            <summary>
+            Gets or initializes the type of the item.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.PublishingApi.Models.Common.ItemModel.Locale">
+            <summary>
+            Gets or initializes the locale of the item.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.PublishingApi.Models.Common.ItemsOptionsModel.PublishRelatedItems">
+            <summary>
+            Gets or initializes a value indicating whether to publish related items.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.PublishingApi.Models.Common.ItemsOptionsModel.PublishChildren">
+            <summary>
+            Gets or initializes a value indicating whether to publish children items.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.PublishingApi.Models.Common.ItemsOptionsModel.Mode">
+            <summary>
+            Gets or initializes the publish mode for the items.
+            </summary>
+        </member>
+        <member name="F:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.PublishingApi.Models.Common.Progress.ItemProcessingStatus.InProgress">
+            <summary>
+            The item processing is in progress.
+            </summary>
+        </member>
+        <member name="F:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.PublishingApi.Models.Common.Progress.ItemProcessingStatus.Completed">
+            <summary>
+            The item processing is completed.
+            </summary>
+        </member>
+        <member name="F:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.PublishingApi.Models.Common.Progress.ItemProcessingStatus.Failed">
+            <summary>
+            The item processing has failed.
+            </summary>
+        </member>
+        <member name="F:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.PublishingApi.Models.Common.Progress.QueuePopulationStatus.InProgress">
+            <summary>
+            Indicates that the queue population is in progress.
+            </summary>
+        </member>
+        <member name="F:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.PublishingApi.Models.Common.Progress.QueuePopulationStatus.Completed">
+            <summary>
+            Indicates that the queue population is completed.
+            </summary>
+        </member>
+        <member name="F:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.PublishingApi.Models.Common.PublishJobStatus.Queued">
+            <summary>
+            The job is queued.
+            </summary>
+        </member>
+        <member name="F:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.PublishingApi.Models.Common.PublishJobStatus.Running">
+            <summary>
+            The job is in progress.
+            </summary>
+        </member>
+        <member name="F:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.PublishingApi.Models.Common.PublishJobStatus.Completed">
+            <summary>
+            The job is completed.
+            </summary>
+        </member>
+        <member name="F:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.PublishingApi.Models.Common.PublishJobStatus.Failed">
+            <summary>
+            The job has failed.
+            </summary>
+        </member>
+        <member name="F:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.PublishingApi.Models.Common.PublishJobStatus.Canceled">
+            <summary>
+            The job has been canceled.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.PublishingApi.Models.Common.PublishOptionsModel.Items">
+            <summary>
+            Gets or initializes the items to publish.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.PublishingApi.Models.Common.PublishOptionsModel.Xmc">
+            <summary>
+            Gets the XMC publishing options.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.PublishingApi.Models.Common.XmcPublishingModel.Site">
+            <summary>
+            Gets the site options for publishing.
+            </summary>
+        </member>
+        <member name="P:Sitecore.ExperienceEdge.Connector.ContentHubDelivery.PublishingApi.Models.Common.XmcPublishingModel.Items">
+            <summary>
+            Gets the items options for publishing.
+            </summary>
+        </member>
+    </members>
+</doc>
